@@ -1,2 +1,6 @@
-# Implemente aws_cloudfront_origin_access_control.frontend conforme o roteiro.
-# Origem S3, assinatura always e protocolo sigv4.
+resource "aws_cloudfront_origin_access_control" "frontend" {
+  name                              = var.cloudfront_oac_name
+  origin_access_control_origin_type = "s3"
+  signing_behavior                  = "always"
+  signing_protocol                  = "sigv4"
+}

@@ -1,2 +1,5 @@
-# Implemente data.aws_route53_zone.public conforme o roteiro.
-# Ele consulta uma zona pública existente; não cria nem importa a zona.
+data "aws_route53_zone" "public" {
+  name         = var.domain_name
+  private_zone = false
+}
+

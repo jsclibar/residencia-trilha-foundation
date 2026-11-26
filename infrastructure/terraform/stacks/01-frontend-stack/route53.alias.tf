@@ -1,3 +1,23 @@
-# Implemente aws_route53_record.frontend conforme o roteiro.
-# O A Alias do domínio customizado aponta para a distribuição CloudFront.
-# A zona DNS fica na mesma conta do laboratório, sem outro provider.
+resource "aws_route53_record" "frontend" {
+  zone_id = data.aws_route53_zone.public.zone_id
+  name    = var.domain_name
+  type    = "A"
+
+  alias {
+    name                   = aws_cloudfront_distribution.frontend.domain_name
+    zone_id                = aws_cloudfront_distribution.frontend.hosted_zone_id
+    evaluate_target_health = false
+  }
+}
+
+resource "aws_route53_record" "frontend_www" {
+  zone_id = data.aws_route53_zone.public.zone_id
+  name    = "www.${var.domain_name}"
+  type    = "A"
+
+  alias {
+    name                   = aws_cloudfront_distribution.frontend.domain_name
+    zone_id                = aws_cloudfront_distribution.frontend.hosted_zone_id
+    evaluate_target_health = false
+  }
+}

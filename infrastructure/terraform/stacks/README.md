@@ -14,3 +14,8 @@ backend.tf antes do init da frontend stack.
 
 Consulte [o guia da Sprint 5](../README.md) para a lista dos arquivos, a ordem
 de execução e os cuidados com os dois states.
+
+## Laboratório de recuperação
+
+- [`99-tfstate-test`](99-tfstate-test/README.md) — simule a perda de um vínculo no
+  state, restaure uma versão anterior no S3 e compare os planos do Terraform.

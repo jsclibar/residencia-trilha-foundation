@@ -1,5 +1,13 @@
-# Antes do terraform init, adicione o trecho backend.tf completo do App.
-# Preencha bucket, key, region, profile e allowed_account_ids do laboratório.
-# O bucket e a região vêm dos outputs da 00-remote-backend-stack já aplicada.
-# Não use var.* nem copie o state local da stack anterior.
-# Inclua use_lockfile = true para bloquear operações concorrentes no state.
+# Armazena no s3 o estado do Terraform.
+
+terraform {
+  backend "s3" {
+    bucket              = "residencia-foundation-state-files-637423180547"
+    key                 = "residencia-foundation/01-frontend-stack.tfstate"
+    region              = "us-east-1"
+    profile             = "jsclibar-labs"
+    allowed_account_ids = ["637423180547"]
+    encrypt             = true
+    use_lockfile        = true
+  }
+}
