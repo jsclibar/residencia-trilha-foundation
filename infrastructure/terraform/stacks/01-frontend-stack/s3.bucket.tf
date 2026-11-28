@@ -1,8 +1,8 @@
 resource "aws_s3_bucket" "frontend" {
-  bucket = var.frontend_bucket_name
+  bucket = var.frontend_bucket.name
 
   lifecycle {
-    prevent_destroy = false
+    prevent_destroy = true
   }
 }
 
@@ -22,6 +22,7 @@ resource "aws_s3_bucket_ownership_controls" "frontend" {
   }
 }
 
+
 resource "aws_s3_bucket_server_side_encryption_configuration" "frontend" {
   bucket = aws_s3_bucket.frontend.id
 
@@ -31,6 +32,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "frontend" {
     }
   }
 }
+
 
 resource "aws_s3_bucket_policy" "frontend" {
   bucket = aws_s3_bucket.frontend.id

@@ -1,18 +1,18 @@
 resource "aws_cloudfront_distribution" "frontend" {
   enabled             = true
   is_ipv6_enabled     = true
-  default_root_object = "index.html"
-  price_class         = "PriceClass_100"
+  default_root_object = var.cloudfront_distribution.default_root_object
+  price_class         = var.cloudfront_distribution.price_class
   aliases             = [var.domain_name, "www.${var.domain_name}"]
 
   origin {
     domain_name              = aws_s3_bucket.frontend.bucket_regional_domain_name
-    origin_id                = "frontend-s3"
+    origin_id                = var.cloudfront_distribution.origin_id
     origin_access_control_id = aws_cloudfront_origin_access_control.frontend.id
   }
 
   default_cache_behavior {
-    target_origin_id       = "frontend-s3"
+    target_origin_id       = var.cloudfront_distribution.origin_id
     viewer_protocol_policy = "redirect-to-https"
     allowed_methods        = ["GET", "HEAD", "OPTIONS"]
     cached_methods         = ["GET", "HEAD"]

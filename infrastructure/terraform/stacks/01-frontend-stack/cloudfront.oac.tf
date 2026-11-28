@@ -1,5 +1,5 @@
 resource "aws_cloudfront_origin_access_control" "frontend" {
-  name                              = var.cloudfront_oac_name
+  name                              = var.cloudfront_distribution.oac_name
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"
   signing_protocol                  = "sigv4"
